@@ -6,11 +6,7 @@
  */
 module.exports = (function Queue(){
 
-	var queue;
-
-	function init(){
-		queue = [];
-	}
+	var queue = [];
 
     function enqueue(newElement){
     	queue.push(newElement);
@@ -20,10 +16,19 @@ module.exports = (function Queue(){
     	return queue.shift();
     }
 
+    function getSize(){
+		return queue.length;
+	}
+
+	function peek(){
+		return queue[0];
+	}
+
 	var publicApi = {
-		init: init,
 		enqueue: enqueue,
 		dequeue: dequeue,
+		getSize: getSize,
+		peek: peek
 	};
 
 	return publicApi;
