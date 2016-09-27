@@ -1,26 +1,31 @@
 /**
  * Implementation of the queue (FIFO) using JavaScript
  * 
- * author: przemek@devrunner.pl
- *
+ * author: Przemyslaw Jazlo <przemek@devrunner.pl>
+ * 
  */
+module.exports = (function Queue(){
 
+	var queue;
 
-// the easiest way to implement queue is by using an array and built-in push/shift methods
-var queue = [];
-queue.push('a');
-queue.push('b');
-queue.push('c');
-queue.push('d');
-queue.push('e');
+	function init(){
+		queue = [];
+	}
 
+    function enqueue(newElement){
+    	queue.push(newElement);
+    }
 
-// print stack before pop
-console.log(queue);
+    function dequeue(){
+    	return queue.shift();
+    }
 
-// take the top element
-var element = queue.shift();
+	var publicApi = {
+		init: init,
+		enqueue: enqueue,
+		dequeue: dequeue,
+	};
 
-// print stack and the element after pop
-console.log(queue);
-console.log(element);
+	return publicApi;
+
+})();

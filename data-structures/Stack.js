@@ -1,25 +1,41 @@
 /**
- * Implementation of the stack using JavaScript
+ * Implementation of the stack (LIFO) using JavaScript
  * 
- * author: przemek@devrunner.pl
+ * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  *
  */
+module.exports = (function Stack(){
 
+	var stack;
 
-// the easiest way to implement stack is by using an array and built-in push/pop methods
-var stack = [];
-stack.push('a');
-stack.push('b');
-stack.push('c');
-stack.push('d');
+	function init(){
+		stack = [];
+	}
 
+	function push(newElement){
+		stack.push(newElement);
+	}
 
-// print stack before pop
-console.log(stack);
+	function pop(){
+		return stack.pop();
+	}
 
-// take the top element
-var element = stack.pop();
+	function peek(){
+		return stack[stack.length-1];
+	}
 
-// print stack and the element after pop
-console.log(stack);
-console.log(element);
+	function isEmpty(){
+		return (stack.length === 0);
+	}
+
+	var publicApi = {
+		init: init,
+		push: push,
+		pop: pop,
+		isEmpty: isEmpty,
+		peek: peek
+	};
+
+	return publicApi;
+
+})();
