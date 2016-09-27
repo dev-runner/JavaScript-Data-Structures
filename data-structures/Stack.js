@@ -6,11 +6,7 @@
  */
 module.exports = (function Stack(){
 
-	var stack;
-
-	function init(){
-		stack = [];
-	}
+	var stack = [];
 
 	function push(newElement){
 		stack.push(newElement);
@@ -24,16 +20,25 @@ module.exports = (function Stack(){
 		return stack[stack.length-1];
 	}
 
+	function getSize(){
+		return stack.length;
+	}
+
 	function isEmpty(){
 		return (stack.length === 0);
 	}
 
+	function clear(){
+		stack = [];
+	}
+
 	var publicApi = {
-		init: init,
 		push: push,
 		pop: pop,
 		isEmpty: isEmpty,
-		peek: peek
+		peek: peek,
+		getSize: getSize,
+		clear: clear
 	};
 
 	return publicApi;

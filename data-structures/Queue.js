@@ -24,11 +24,21 @@ module.exports = (function Queue(){
 		return queue[0];
 	}
 
+	function isEmpty(){
+		return (queue.length === 0);
+	}
+
+	function clear(){
+		queue = [];
+	}
+
 	var publicApi = {
 		enqueue: enqueue,
 		dequeue: dequeue,
 		getSize: getSize,
-		peek: peek
+		peek: peek,
+		isEmpty: isEmpty,
+		clear: clear
 	};
 
 	return publicApi;
