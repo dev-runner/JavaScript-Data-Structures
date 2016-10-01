@@ -1,10 +1,11 @@
+"use strict";
 /**
  * Implementation of the dictionary abstract data type using JavaScript
  *
  * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  *
 **/
-module.exports = (function Dictionary(){
+var Dictionary = (function Dictionary(){
 
 	var dict = {};
 	var count = 0;
@@ -36,9 +37,13 @@ module.exports = (function Dictionary(){
 		return count;
 	}
 
+	function isEmpty(){
+		return (count === 0);
+	}
+
 	// enumerates through the entire collection
 	function traverse(f){
-		for(key in dict){
+		for(let key in dict){
 			if(dict.hasOwnProperty(key)){
 				f(dict[key]);
 			}
@@ -51,9 +56,12 @@ module.exports = (function Dictionary(){
 		remove: remove,
 		get: get,
 		getSize: getSize,
+		isEmpty: isEmpty,
 		traverse: traverse
 	};
 
 	return publicApi;
 
 })();
+
+module.exports = Dictionary;
