@@ -72,6 +72,45 @@ module.exports = (function LinkedList(){
 		return null;
 	}
 
+	// reverts the order of the list - iterative
+	function reverseIterative(){
+		var current = root, prev = null, next = null;
+
+		while(current != null){
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+		root = prev;
+	}
+	
+	// reverts the order in the recursive function calls
+	function reverseRecursive(node){
+		if(node === null || node.next === null){
+			root = node;
+			return;
+		}
+		reverseRecursive(node.next);
+		node.next.next = node;
+		node.next = null;
+	}
+
+	// reverts the order of the list
+	function reverse(algorithm){
+		
+		algorithm = (typeof algorithm === 'undefined') ? 'iterative' : algorithm;
+
+		switch(algorithm){
+			case 'recursive':
+				return reverseRecursive(root);
+			case 'iterative':
+			default:
+				return reverseIterative();
+		}
+	}
+
+
 	// traverse the list applying function f to each element
 	function traverse(f){
 		var current = root;
@@ -87,6 +126,7 @@ module.exports = (function LinkedList(){
 		insertBeginning: insertBeginning,
 		deleteElement: deleteElement,
 		find: find,
+		reverse: reverse,
 		traverse: traverse
 	};
 

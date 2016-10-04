@@ -5,18 +5,13 @@ list.insert('A');
 list.insert('B');
 list.insert('C');
 list.insert('D');
-list.insert('E');
 
-list.insertBeginning('X');
-list.insertBeginning('Y');
-
+console.log('printing the list...');
 // display the list
 var f = function(e){ console.log(e.data); };
 list.traverse(f);
 
-// delete element
-list.deleteElement('C');
-
-// shouldn't be able to find
-var found = list.find('C');
-console.log(found);
+// reverse order of the list
+console.log('reverting order of the list...');
+list.reverse();
+list.traverse(f);
