@@ -9,6 +9,9 @@ module.exports = (function LinkedList(){
 	// head of the linked list = reference to the first element
 	var head = null;
 
+	// count number of elements in the linked list
+	var size = 0;
+
 	// creates returns a new node for the linked list
 	function createNode(data){
 		return {
@@ -24,6 +27,7 @@ module.exports = (function LinkedList(){
 
 		if(head === null){
 			head = newNode;
+			++size;
 			return;
 		}else{
 			var current = head;
@@ -31,6 +35,7 @@ module.exports = (function LinkedList(){
 				current = current.next;
 			}
 			current.next = newNode;
+			++size;
 			return;
 		}
 	}
@@ -40,6 +45,7 @@ module.exports = (function LinkedList(){
 		var newNode = createNode(data);
 		newNode.next = head;
 		head = newNode;
+		++size;
 	}
 
 	// removes element from the list that holds data
@@ -54,6 +60,7 @@ module.exports = (function LinkedList(){
 					previous.next = current.next;
 				}
 				current = null;
+				--size;
 				return true;
 			}
 			previous = current;
@@ -144,6 +151,22 @@ module.exports = (function LinkedList(){
 		traverseRecursive(node.next, f);
 	}
 
+	// get size of the linked list
+	function getSize(){
+		return size;
+	}
+
+	// check if linked list is empty
+	function isEmpty(){
+		return (size === 0);
+	}
+
+	// clears the linked list
+	function clear(){
+		head = null;
+		size = 0;
+	}
+
 	// linked list public API
 	var publicApi = {
 		insert: insert,
@@ -151,7 +174,10 @@ module.exports = (function LinkedList(){
 		remove: remove,
 		find: find,
 		reverse: reverse,
-		traverse: traverse
+		traverse: traverse,
+		getSize: getSize,
+		isEmpty: isEmpty,
+		clear: clear,
 	};
 
 	return publicApi;

@@ -9,6 +9,7 @@ var DoubleLinkedList = (function(){
 	var head = getNode(null);
 	var size = 0;
 
+	// create and return a new node
 	function getNode(data){
 		return {
 			data: data,
