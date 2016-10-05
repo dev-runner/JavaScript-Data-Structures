@@ -14,4 +14,4 @@ list.traverse(f);
 // reverse order of the list
 console.log('reverting order of the list...');
 list.reverse();
-list.traverse(f);
+list.traverse(f, 'recursive');
