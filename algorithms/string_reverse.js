@@ -42,13 +42,26 @@ function string_reverse_stack(s){
 }
 
 
+/**
+  * Reverses the string using recursion
+  */
+function string_reverse_recursive(s) {
+  return (s === '') ? '' : string_reverse_recursive(s.substr(1)) + s.charAt(0);
+}
+
 
 var s = 'ABCDEFGHIJK';
 
 console.log('Given string: ' + s);
 
-console.log('Reversed using the built-in functions: ' + string_reverse(s));
+// built-in functions
+console.log('Reversed using the built-in functions: ' + string_reverse(s) );
 
-console.log('Reversed using the iterative algorithm: ' + string_reverse_iterative(s));
+// iterative
+console.log('Reversed using the iterative algorithm: ' + string_reverse_iterative(s) );
 
-console.log('Reversed using the stack: ' + string_reverse_stack(s));
+// stack
+console.log('Reversed using the stack: ' + string_reverse_stack(s) );
+
+// recursive
+console.log('Reversed using recursion: ' + string_reverse_recursive(s) );
