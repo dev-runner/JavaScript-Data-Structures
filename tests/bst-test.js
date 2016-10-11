@@ -1,12 +1,7 @@
 var bst = require('../data-structures/BinarySearchTree.js');
 
-bst.insert(7);
 bst.insert(3);
-bst.insert(5);
-bst.insert(13);
-bst.insert(10);
-bst.insert(15);
-
+bst.insert(1);
 
 // traverse bst tree (in-order)
 bst.traverse( function(node){console.log(node.key)} );
@@ -27,7 +22,10 @@ console.log(min_node);
 var max_node = bst.searchMax();
 console.log(max_node);
 */
+/*
 console.log('Deleting 7...');
 bst.remove(7);
 bst.traverse( function(node){console.log(node.key)} );
+*/
 
+console.log('Height of this tree is: ' + bst.getTreeHeight() );

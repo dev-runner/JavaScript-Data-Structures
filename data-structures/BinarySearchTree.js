@@ -150,6 +150,19 @@ module.exports = (function BinarySearchTree(){
 		}
 	}
 
+	// finds height of the tree
+	function findHeight(node){
+		if(node === null){
+			return -1;
+		}
+		var leftHeight = findHeight(node.left);
+		var rightHeight = findHeight(node.right);
+		return Math.max(leftHeight, rightHeight) + 1;
+	}
+	function getTreeHeight(){
+		return findHeight(root);
+	}
+
 	// traverse bst tree in-order, f - callback function
 	function traverse_node(node, f){
 		if(node === null) return;
@@ -168,6 +181,7 @@ module.exports = (function BinarySearchTree(){
 		insert: insert,
 		remove: remove,
 		traverse: traverse,
+		getTreeHeight: getTreeHeight,
 	};
 
 	return publicApi;
