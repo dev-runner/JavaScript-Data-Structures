@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Implementation of the binary search tree (BST) using JavaScript
  *
@@ -61,7 +62,8 @@ module.exports = (function BinarySearchTree(){
 			root = createNode(key);
 		}
 		else {
-			var current_node = parent_node = root;
+			var current_node = root;
+			var parent_node = root;
 			var subtree;
 
 			while(current_node !== null){
@@ -164,14 +166,40 @@ module.exports = (function BinarySearchTree(){
 	}
 
 	// traverse bst tree in-order, f - callback function
-	function traverse_node(node, f){
+	function traverse_inorder(node, f){
 		if(node === null) return;
-		traverse_node(node.left, f);
+		traverse_inorder(node.left, f);
 		f(node);
-		traverse_node(node.right,f);
+		traverse_inorder(node.right,f);
 	}
-	function traverse(f){
-		traverse_node(root, f);
+	function traverse_preorder(node, f){
+		if(node === null) return;
+		f(node);
+		traverse_preorder(node.left, f);
+		traverse_preorder(node.right,f);	
+	}
+	function traverse_postorder(node, f){
+		if(node === null) return;
+		traverse_postorder(node.left, f);
+		traverse_postorder(node.right,f);
+		f(node);
+	}
+	function traverse(f, algorithm){
+
+		f = (typeof f === 'undefined') ? function(n){ console.log(n.key);} : f;
+		algorithm = (typeof algorithm === 'undefined') ? 'inorder' : algorithm;
+
+		switch(algorithm){
+			case 'preorder':
+				traverse_preorder(root, f);
+				break;
+			case 'postorder':
+				traverse_postorder(root, f);
+				break;
+			case 'inorder':
+			default:
+				traverse_inorder(root, f);
+		}
 	}
 
 	var publicApi = {

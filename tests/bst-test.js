@@ -2,9 +2,14 @@ var bst = require('../data-structures/BinarySearchTree.js');
 
 bst.insert(3);
 bst.insert(1);
+bst.insert(5);
+bst.insert(7);
+bst.insert(2);
+bst.insert(4);
+
 
 // traverse bst tree (in-order)
-bst.traverse( function(node){console.log(node.key)} );
+bst.traverse();
 
 // try to find node
 /*
