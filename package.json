@@ -1,0 +1,30 @@
+{
+  "name": "javascript-data-structures",
+  "version": "1.0.0",
+  "description": "Common data structures and algorithms implemented in JavaScript.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-runner/JavaScript-Data-Structures.git"
+  },
+  "keywords": [
+    "data",
+    "structures",
+    "algorithms"
+  ],
+  "author": "przemek <przemek@devrunner.pl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dev-runner/JavaScript-Data-Structures/issues"
+  },
+  "homepage": "https://github.com/dev-runner/JavaScript-Data-Structures#readme",
+  "dependencies": {
+    "lodash": "^4.16.4"
+  }
+}
