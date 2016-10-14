@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/dev-runner/JavaScript-Data-Structures#readme",
   "dependencies": {
-    "lodash": "^4.16.4"
+    "prompt": "^1.0.0"
   }
 }

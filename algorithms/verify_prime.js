@@ -1,6 +1,5 @@
 "use strict";
 
-
 /**
   * Algorithm verifies if the given number n is a prime number
   */
@@ -10,17 +9,42 @@ function verify_prime(n){
 
 	if(n <= 1) return false;
 
-	for (var i = 2; i <= Math.sqrt(n); ++i){
-		if(n%i === 0) return false;
+	// check factors of n until square root of n
+	for (let i = 2, max = Math.sqrt(n); i <= max; ++i){
+		if(n % i === 0) return false;
 	}
-	
+
 	return true;
 }
 
 
-console.log("4 is prime number: " + verify_prime(4) );
-console.log("7 is prime number: " + verify_prime(7) );
-console.log("13 is prime number: " + verify_prime(13) );
-console.log("25 is prime number: " + verify_prime(25) );
-console.log("2 is prime number: " + verify_prime(2) );
-console.log("'xyz' is prime number: " + verify_prime('xyz') );
+var prompt = require("prompt");
+
+prompt.start();
+
+var schema = {
+	properties: {
+		number: {
+			pattern: /^[0-9]+$/,
+			message: 'Please enter a valid number.',
+			required: true
+		},
+	}
+};
+
+prompt.get(schema, function (err, result) {
+	
+	if (err) { 
+		console.log(err);
+		return 1;
+	}
+	var n = parseInt(result.number);
+	
+	if(verify_prime(n) === true){
+		console.log(n + ' IS A PRIME NUMBER');
+	}
+	else {
+		console.log(n + ' IS NOT A PRIME NUMBER');
+	}
+
+});
