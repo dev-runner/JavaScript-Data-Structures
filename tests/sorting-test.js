@@ -7,6 +7,6 @@ sorting.init(a);
 
 // sorting with selection sort
 console.log('Sorted array:');
-sorting.insertionSort();
+sorting.quickSort();
 
 sorting.printData();
