@@ -1,10 +1,12 @@
 /**
- * Implementation of the single-linked list using JavaScript
+ * Implementation of the singly-linked list using JavaScript
  *
  * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  *
  */
-module.exports = (function LinkedList(){
+var LinkedList = function LinkedList(){
+	
+	"use strict";
 
 	// head of the linked list = reference to the first element
 	var head = null;
@@ -182,4 +184,6 @@ module.exports = (function LinkedList(){
 
 	return publicApi;
 
-})();
+};
+
+module.exports = LinkedList;

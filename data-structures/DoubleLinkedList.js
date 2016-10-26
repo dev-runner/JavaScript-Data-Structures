@@ -1,12 +1,16 @@
 /**
- * Implementation of the double linked list using JavaScript
+ * Implementation of the doubly-linked list using JavaScript
  *
  * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  *
  */
-var DoubleLinkedList = (function(){
+var DoubleLinkedList = function(){
 
+	"use strict";
+
+	// head of the list
 	var head = getNode(null);
+
 	var size = 0;
 
 	// create and return a new node
@@ -167,6 +171,6 @@ var DoubleLinkedList = (function(){
 
 	return publicApi;
 
-})();
+};
 
 module.exports = DoubleLinkedList;

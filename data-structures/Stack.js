@@ -4,8 +4,11 @@
  * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  *
  */
-module.exports = (function Stack(){
+ var Stack = function Stack(){
 
+ 	"use strict";
+
+ 	// js array is the data structure that can be used for stack implementation
 	var stack = [];
 
 	// inserts new element to the stack
@@ -49,4 +52,6 @@ module.exports = (function Stack(){
 
 	return publicApi;
 
-})();
+};
+
+module.exports = Stack;

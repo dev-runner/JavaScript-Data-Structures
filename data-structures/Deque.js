@@ -4,7 +4,9 @@
  * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  * 
  */
-module.exports = (function Deque(){
+var Deque = function Deque(){
+
+	"use strict";
 
 	var deque = [];
 
@@ -60,4 +62,6 @@ module.exports = (function Deque(){
 
 	return publicApi;
 
-})();
+};
+
+module.exports = Deque;

@@ -4,8 +4,11 @@
  * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  * 
  */
-var Queue = (function Queue(){
+var Queue = function Queue(){
 
+	"use strict";
+
+	// js array is a great data structure for implementation of the queue
 	var queue = [];
 
 	// add new element to the queue
@@ -49,6 +52,6 @@ var Queue = (function Queue(){
 
 	return publicApi;
 
-})();
+};
 
 module.exports = Queue;

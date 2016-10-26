@@ -1,13 +1,17 @@
-"use strict";
 /**
  * Implementation of the dictionary abstract data type using JavaScript
  *
  * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  *
 **/
-var Dictionary = (function Dictionary(){
-
+var Dictionary = function Dictionary(){
+	
+	"use strict";
+	
+	// using the regular js object literal as dictionary
 	var dict = {};
+
+	// size of the dictionary
 	var count = 0;
 
 	// add element to the collection
@@ -50,7 +54,6 @@ var Dictionary = (function Dictionary(){
 		}
 	}
 
-
 	var publicApi = {
 		add: add,
 		remove: remove,
@@ -62,6 +65,6 @@ var Dictionary = (function Dictionary(){
 
 	return publicApi;
 
-})();
+};
 
 module.exports = Dictionary;

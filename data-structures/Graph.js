@@ -1,5 +1,3 @@
-"use strict";
-
 /**
   * Implementation of the graph using JavaScript
   * The graph is represented in the form of a hashed adjecency list
@@ -8,6 +6,8 @@
   *
   */
 var Graph = function(s){
+
+	"use strict";
 
 	// graph settings
 	var settings = {};

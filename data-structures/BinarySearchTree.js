@@ -1,12 +1,14 @@
-"use strict";
 /**
  * Implementation of the binary search tree (BST) using JavaScript
  *
  * author: Przemyslaw Jazlo <przemek@devrunner.pl>
  *
  */
-module.exports = (function BinarySearchTree(){
+var BST = function BinarySearchTree(){
 
+	"use strict";
+
+	// root of the tree
 	var root = null;
 
 	// create and return new node object
@@ -214,4 +216,6 @@ module.exports = (function BinarySearchTree(){
 
 	return publicApi;
 
-})();
+};
+
+module.exports = BST;

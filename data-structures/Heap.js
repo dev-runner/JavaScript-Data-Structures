@@ -1,13 +1,12 @@
-"use strict";
-
 /**
   * Implementation of the binary heap (priority queue) in JavaScript
-  *
   *
   * author: Przemyslaw Jazlo <przemek@devrunner.pl>
   * 
   */
-var Heap = (function(){
+var Heap = function(){
+
+	"use strict";
 
 	var heap = [-Infinity];
 
@@ -87,6 +86,6 @@ var Heap = (function(){
 	};
 	return publicApi;
 
-})();
+};
 
 module.exports = Heap;
