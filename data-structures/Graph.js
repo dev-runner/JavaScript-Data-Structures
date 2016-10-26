@@ -189,6 +189,68 @@ var Graph = function(s){
 		return vertices[vKey].neighbours;
 	}
 
+	/**
+	  * Depth-First Search traversal of the graph
+	  */
+	function traverseDFS(vKey, f) {
+
+		// first, set all vertices and edges as unvisited
+		for(let key in vertices){
+			if(vertices.hasOwnProperty(key)){
+				let v = vertices[key];
+				v.visited = false;
+				v.unvisitedEdges = Object.keys(v.neighbours);
+			}
+		}
+
+		// visit the start vertex
+		var startVertex = vertices[vKey];
+		startVertex.visited = true;
+		f(startVertex);
+
+		if(startVertex.unvisitedEdges.length > 0){
+			
+			// stack keeps vertices that have been visited and which have unvisited neighbours
+			var stack = [];
+			stack.push(vertices[vKey])
+
+			while(stack.length > 0){
+				
+				// take vertex v from top of stack
+				let v = stack[stack.length-1];
+
+				// take next unvisited edge coming from vertex v
+				let endVKey = v.unvisitedEdges.shift();
+				let endVertex = vertices[endVKey];
+
+				// all edges already visited? remove it from the stack
+				if(v.unvisitedEdges.length === 0){
+					stack.pop();
+				}
+
+				// if the end vertex was not previously visited
+				if(endVertex.visited === false){
+					f(endVertex); // visit the vertex
+					endVertex.visited = true; // set as visited
+
+					if(endVertex.unvisited.length > 0) {
+						stack.push(endVertex);
+					}
+				}
+			}
+		}
+	}
+
+
+	/**
+	  * Breadth-First Search traversal of the graph
+	  */
+	function traverseBFS(vKey, f){
+		
+		// todo: implement
+
+	}
+
 
 	var publicApi = {
 		addVertex: addVertex,
@@ -197,6 +259,8 @@ var Graph = function(s){
 		deleteEdge: deleteEdge,
 		areConnected: areConnected,
 		getAdjacentVertices: getAdjacentVertices,
+		traverseDFS: traverseDFS,
+		traverseBFS: traverseBFS,
 	};
 	
 	return publicApi;
