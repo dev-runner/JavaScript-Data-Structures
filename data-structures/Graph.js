@@ -171,6 +171,7 @@ var Graph = function(s){
 		for(let v in vertices){
 			delete vertices[v].neighbours[vKey];
 		}
+		return true;
 	}
 
 
@@ -208,6 +209,7 @@ var Graph = function(s){
 		if(settings['directed'] === false){
 			vertices[v2Key].addNeighbour(v1Key, weight);
 		}
+		return true;
 	}
 
 
@@ -286,15 +288,21 @@ var DepthFirstPaths = function(graph, startVertex){
 	if(typeof graph === 'undefined' || typeof graph != 'object') throw "Provide a graph object.";
 	if(typeof startVertex === 'undefined' || !graph.vertexExists(startVertex)) throw "Provide an existing vertex key.";
 
-	var visited = {};
-	var edgeTo = {};
+	var visited, edgeTo;
 
-	// run DFS to find the paths
-	dfs(startVertex);
+	run(startVertex);
+
+	/** Run the algorithm
+	  */
+	function run(v){
+		visited = {};
+		edgeTo = {};
+		dfs(v);	
+	}
 
 
 	/**
-	  * Recursive DFS traversal
+	  * Recursive DFS
 	  */
 	function dfs(v){
 
@@ -302,8 +310,8 @@ var DepthFirstPaths = function(graph, startVertex){
 		var adjList = graph.getAdjacentVertices(v);
 		
 		for(let w in adjList){
-			if(typeof visited[w] === 'undefined'){
-				dfs(w);
+			if(!visited[w]){
+				dfs(w); 
 				edgeTo[w] = v;
 			}
 		}
@@ -336,6 +344,7 @@ var DepthFirstPaths = function(graph, startVertex){
 
 
 	var publicApi = {
+		run: run,
 		isConnected: isConnected,
 		pathTo: pathTo,
 	};
@@ -345,78 +354,93 @@ var DepthFirstPaths = function(graph, startVertex){
 
 
 /**
-  * Graph traversal algorithms
+  * BFS path finder
   */
-var Traversal = function(graph){
-	
+var BreadthFirstPaths = function(graph, startVertex){
+
 	"use strict";
+
+	if(typeof graph === 'undefined' || typeof graph != 'object') throw "Provide a graph object.";
+	if(typeof startVertex === 'undefined' || !graph.vertexExists(startVertex)) throw "Provide an existing vertex key.";
+
+	var visited, edgeTo;
+
+	// initially find paths from start vertex
+	run(startVertex);
+
+	/**
+	  * Run the algorithm
+	  */
+	function run(v){
+		visited = {};
+		edgeTo = {};
+		bfs(v);
+	}
 
 
 	/**
-	  * Depth-First Search traversal of the graph
+	  * BFS traversal using queue
 	  */
-	function traverseDFS(vKey, f) {
+	function bfs(s){
 
-		if( !vertexExists(vKey) ) throw "Vertex " + vKey + " does not exist.";
-		f = (typeof f === 'function') ? f : function(v) { console.log(v.key); };
+		var queue = [];
+		queue.push(s);
+		visited[s] = true;
 
-		// first, set all vertices and edges as unvisited
-		for(let key in vertices){
-			if(vertices.hasOwnProperty(key)){
-				let v = vertices[key];
-				v.visited = false;
-				v.unvisitedEdges = Object.keys(v.neighbours);
-			}
-		}
+		while(queue.length > 0){
 
-		// visit the start vertex
-		var startVertex = vertices[vKey];
-		startVertex.visited = true;
-		f(startVertex);
+			let v = queue.shift();
+			let adj = graph.getAdjacentVertices(v);
 
-		if(startVertex.unvisitedEdges.length > 0){
-			
-			// stack keeps vertices that have been visited and which have unvisited neighbours
-			var stack = [];
-			stack.push(startVertex);
-
-			while(stack.length > 0){
-				
-				// take vertex v from top of stack
-				let v = stack[stack.length-1];
-
-				// take next unvisited edge starting at vertex v
-				let endVKey = v.unvisitedEdges.shift();
-				let endVertex = vertices[endVKey];
-
-				// all edges already visited? remove it from the stack
-				if(v.unvisitedEdges.length === 0){
-					stack.pop();
+			for(let w in adj){
+				if(!visited[w]){
+					queue.push(w);
+					visited[w] = true;
+					edgeTo[w] = v;
 				}
-
-				// if the end vertex was not previously visited
-				if(endVertex.visited === false){
-					f(endVertex); // visit the vertex
-					endVertex.visited = true; // set as visited
-
-					if(endVertex.unvisitedEdges.length > 0) {
-						stack.push(endVertex);
-					}
-				}
-
 			}
 		}
 	}
 
-	var publicApi = {};
-	return publicApi;
 
+	/**
+	  * Returns true if the given vertex is connected to the start vertex
+	  */
+	function isConnected(v){
+		if( !graph.vertexExists(v) ) throw "Vertex " + v + " does not exist.";
+		return (typeof visited[v] !== 'undefined' && visited[v] == true);
+	}
+
+
+	/**
+	  * Returns a DFS path from start vertex to vertex v
+	  */
+	function pathTo(v){
+		
+		if( !isConnected(v) ) return null;
+
+		var stack = [];
+		for(let x=v; x != startVertex; x = edgeTo[x]){
+			stack.push(x);
+		}
+		stack.push(startVertex);
+		return stack;
+	}
+
+
+	var publicApi = {
+		run: run,
+		isConnected: isConnected,
+		pathTo: pathTo,
+	};
+
+	return publicApi;
 };
 
 
+// export module
 module.exports = {
 	Graph: Graph,
-	Traversal: Traversal,
 	DepthFirstPaths: DepthFirstPaths,
+	BreadthFirstPaths: BreadthFirstPaths,
 };
-
