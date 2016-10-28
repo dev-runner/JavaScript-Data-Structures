@@ -248,7 +248,7 @@ var Graph = function(s){
 
 
 	/**
-	  * Returns an array of graphs vertices' keys
+	  * Returns an array of keys of graph vertices
 	  */
 	function getVertices(){
 		return Object.keys(vertices);
@@ -285,8 +285,8 @@ var DepthFirstPaths = function(graph, startVertex){
 
 	"use strict";
 
-	if(typeof graph === 'undefined' || typeof graph != 'object') throw "Provide a graph object.";
-	if(typeof startVertex === 'undefined' || !graph.vertexExists(startVertex)) throw "Provide an existing vertex key.";
+	if(typeof graph === 'undefined' || typeof graph != 'object')
+		throw "Provide a graph object.";
 
 	var visited, edgeTo;
 
@@ -295,6 +295,8 @@ var DepthFirstPaths = function(graph, startVertex){
 	/** Run the algorithm
 	  */
 	function run(v){
+		if(typeof v === 'undefined' || !graph.vertexExists(v))
+			throw "Provide an existing vertex key.";
 		visited = {};
 		edgeTo = {};
 		dfs(v);	
@@ -360,8 +362,8 @@ var BreadthFirstPaths = function(graph, startVertex){
 
 	"use strict";
 
-	if(typeof graph === 'undefined' || typeof graph != 'object') throw "Provide a graph object.";
-	if(typeof startVertex === 'undefined' || !graph.vertexExists(startVertex)) throw "Provide an existing vertex key.";
+	if(typeof graph === 'undefined' || typeof graph != 'object')
+		throw "Provide a graph object.";
 
 	var visited, edgeTo;
 
@@ -372,6 +374,8 @@ var BreadthFirstPaths = function(graph, startVertex){
 	  * Run the algorithm
 	  */
 	function run(v){
+		if(typeof v === 'undefined' || !graph.vertexExists(v))
+			throw "Provide an existing vertex key.";
 		visited = {};
 		edgeTo = {};
 		bfs(v);
@@ -381,9 +385,11 @@ var BreadthFirstPaths = function(graph, startVertex){
 	/**
 	  * BFS traversal using queue
 	  */
-	function bfs(s){
+	function bfs(s) {
 
 		var queue = [];
+		
+		// mark source vertex as visited and add it to the queue
 		queue.push(s);
 		visited[s] = true;
 
