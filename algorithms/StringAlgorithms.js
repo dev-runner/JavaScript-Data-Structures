@@ -1,5 +1,5 @@
 /**
-  * Algorithms for reversing string values
+  * String processing algorithms
   *
   * author: Przemyslaw Jazlo <przemek@devrunner.pl>
   */
@@ -82,4 +82,61 @@ var StringReverse = function(str){
 
 };
 
-module.exports = StringReverse;
+
+/**
+  * Checks if parentheses are balanced correctly in the given string value.
+  * Examples:
+  * [()()]{} - is correctly balanced
+  * []() - is correctly balanced
+  * [(()]{{} - is not correctly balanced
+  * [)) - is not correctly balanced
+  */
+var ParenthesesBalance = function(str){
+	
+	"use strict";
+
+	var s;
+	setString(str);
+
+	/**
+	  * Sets the string value
+	  */
+	function setString(str){
+		if(typeof(str) !== 'string') throw "String parameter must be provided.";
+		s = str;
+	}
+
+	/**
+	  * Algorithm implementation using stack
+	  */
+	function checkBalance(){
+
+		var stack = require('../data-structures/Stack')();
+
+		for(let i=0, len=s.length; i<len; ++i){
+
+			if(s[i]==='(' || s[i]==='[' || s[i]==='{'){
+				stack.push(s[i]);
+			}
+			else if(s[i]===')' && stack.pop() !== '(' ) return false;
+			else if(s[i]===']' && stack.pop() !== '[' ) return false;
+			else if(s[i]==='}' && stack.pop() !== '{' ) return false;
+		}
+
+		return stack.isEmpty() ? true : false;
+	}
+
+
+	var publicApi = {
+		setString: setString,
+		checkBalance: checkBalance,
+	};
+
+	return publicApi;
+};
+
+
+module.exports = {
+	StringReverse: StringReverse,
+	ParenthesesBalance: ParenthesesBalance,
+};
