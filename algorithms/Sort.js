@@ -1,19 +1,26 @@
-"use strict";
-
 /**
   * Sorting algorithms implemented in JavaScript
   *
   * author: Przemyslaw Jazlo <przemek@devrunner.pl>
   */
-var Sorting = (function(){
+var Sort = function(arr){
+
+	"use strict";
 
 	var data = [];
 	var maxIndex = -1;
 
-	function init(arr){
+	setData(arr);
+
+	/**
+	  * Sets the data array
+	  */
+	function setData(arr){
+		if(arr.constructor !== Array) throw "Array of numbers must be provided";
 		data = arr;
-		maxIndex = data.length-1;
+		maxIndex = arr.length-1;
 	}
+
 
 	/**
 	  * Selection sort algorithm
@@ -32,6 +39,7 @@ var Sorting = (function(){
 			data[i] = data[iMin];
 			data[iMin] = tmp;
 		}
+		return data;
 	}
 
 
@@ -53,6 +61,7 @@ var Sorting = (function(){
 			}
 			if(flag === 0) break; // no swaps = array already sorted
 		}
+		return data;
 	}
 
 
@@ -71,6 +80,7 @@ var Sorting = (function(){
 			}
 			data[hole] = value;
 		}
+		return data;
 	}
 
 
@@ -111,7 +121,8 @@ var Sorting = (function(){
 	  * Time complexity: O(nlogn)
 	  */
 	function quickSort(){
-		quickSortRecursive(0,maxIndex);
+		quickSortRecursive(0, maxIndex);
+		return data;
 	}
 
 
@@ -121,7 +132,7 @@ var Sorting = (function(){
 	}
 
 	var publicApi = {
-		init: init,
+		setData: setData,
 		selectionSort: selectionSort,
 		bubbleSort: bubbleSort,
 		insertionSort: insertionSort,
@@ -131,6 +142,6 @@ var Sorting = (function(){
 
 	return publicApi;
 
-})();
+};
 
-module.exports = Sorting;
+module.exports = Sort;
