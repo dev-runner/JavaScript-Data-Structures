@@ -16,7 +16,8 @@ var Sort = function(arr){
 	  * Sets the data array
 	  */
 	function setData(arr){
-		if(arr.constructor !== Array) throw "Array of numbers must be provided";
+		if(typeof(arr) === 'undefined' || !Array.isArray(arr))
+			throw "Array of numbers must be provided";
 		data = arr;
 		maxIndex = arr.length-1;
 	}
@@ -28,9 +29,9 @@ var Sort = function(arr){
 	  */
 	function selectionSort(){
 
-		for(let i = 0; i < maxIndex-1; ++i){
+		for(let i = 0; i <= maxIndex-1; ++i){
 			let iMin = i;
-			for(let j = i+1; j < maxIndex; ++j){
+			for(let j = i+1; j <= maxIndex; ++j){
 				if(data[j] < data[iMin]){
 					iMin = j;
 				}
@@ -71,7 +72,7 @@ var Sort = function(arr){
 	  */
 	function insertionSort(){
 
-		for(let i = 1; i < maxIndex; ++i){
+		for(let i = 1; i <= maxIndex; ++i){
 			let value = data[i], hole = i;
 
 			while(hole > 0 && data[hole-1] > value){
