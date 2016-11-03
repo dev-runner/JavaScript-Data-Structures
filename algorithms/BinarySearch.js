@@ -1,5 +1,5 @@
 /**
-  * Binary search algorithm implemented in JavaScript
+  * Binary search algorithm implemented in JavaScript.
   *
   * Copyright (c) 2016 Przemek Jażło <przemek@devrunner.pl>
   *
